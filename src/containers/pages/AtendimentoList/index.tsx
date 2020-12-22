@@ -61,7 +61,7 @@ function AtendimentoList() {
                     title={`Agendamento: ${item.id}`}
                     extra={<Tag color="warning">{item.vagas} vagas</Tag>}
                   >
-                    <p>Estabelecimento: {item.horario.split("-")[1]}</p>
+                    <p>Estabelecimento: {item.estabelecimento}</p>
                     <p>Data e Horário: {item.horario}</p>
                   </Card>
                 </List.Item>
