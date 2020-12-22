@@ -43,7 +43,7 @@ function AtendimentoList() {
             style={{ backgroundColor: "#641498", color: "#FCFCFC" }}
             icon={<FormOutlined />}
             onClick={() => {
-              history.push("/agendamentos/create");
+              history.push("/atendimentos/create");
             }}
           >
             Cadastrar Atendimento
