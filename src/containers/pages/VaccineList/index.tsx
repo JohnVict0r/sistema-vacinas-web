@@ -9,7 +9,7 @@ import Panel from "../../../components/Panel";
 import { Row, Col, Empty, Button, Card, Tag } from "antd";
 import { FormOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
-import { dateFormated, dateExtend } from "../../../utils/format";
+import { dateExtend } from "../../../utils/format";
 
 function VaccineList() {
   const [vaccines, setVaccines] = useState<any[]>([]);
