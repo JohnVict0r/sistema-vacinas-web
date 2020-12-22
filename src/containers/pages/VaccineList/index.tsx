@@ -6,26 +6,13 @@ import "./style.css";
 import api from "../../../services/api";
 import { getAuthToken } from "../../../utils/authentication";
 import Panel from "../../../components/Panel";
-import { Row, Col, Empty, Button } from "antd";
+import { Row, Col, Empty, Button, Card, Tag } from "antd";
 import { FormOutlined } from "@ant-design/icons";
-import Card from "../../../components/Card";
-import { dateExtend } from "../../../utils/format";
 import { useHistory } from "react-router-dom";
-
-export interface IVacinne {
-  id: number;
-  name: string;
-  description: string;
-  lote: string; //lote
-  applicator: string;
-  location: string;
-  date_application: string;
-  order: number;
-  vaccine_id: number;
-}
+import { dateFormated, dateExtend } from "../../../utils/format";
 
 function VaccineList() {
-  const [vaccines, setVaccines] = useState<IVacinne[]>([]);
+  const [vaccines, setVaccines] = useState<any[]>([]);
 
   const token = getAuthToken();
 
@@ -49,7 +36,7 @@ function VaccineList() {
             style={{ backgroundColor: "#641498", color: "#FCFCFC" }}
             icon={<FormOutlined />}
             onClick={() => {
-              history.push("/vaccines/create");
+              history.push("/minhas-vacinas/create");
             }}
           >
             Cadastrar Vacina
@@ -61,10 +48,18 @@ function VaccineList() {
             vaccines.map((vaccine) => (
               <Col xs={{ span: 24 }} lg={{ span: 8 }}>
                 <Card
-                  name={`${vaccine.name} - ${vaccine.description}`}
-                  date={dateExtend(vaccine.date_application)}
-                  location={vaccine.lote}
-                ></Card>
+                  title={`Vacina: ${vaccine.vaccine}`}
+                  extra={
+                    vaccine.is_professional_created ? (
+                      <Tag color="success">Verificado</Tag>
+                    ) : (
+                      <Tag color="warning">Privado</Tag>
+                    )
+                  }
+                >
+                  <p>{dateExtend(vaccine.date_application)}</p>
+                  <p>Lote: {vaccine.lote}</p>
+                </Card>
               </Col>
             ))
           ) : (

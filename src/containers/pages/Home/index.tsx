@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Row, Col, Empty } from "antd";
 import "./styles.less";
 import Panel from "../../../components/Panel";
 
 import { CalendarOutlined } from "@ant-design/icons";
-import { getProfile } from "../../../utils/authentication";
-import { useHistory } from "react-router-dom";
+import {
+  getProfile,
+  getAuthToken,
+  setProfile,
+} from "../../../utils/authentication";
+import api from "../../../services/api";
 
 const Home: React.FC = () => {
-  const history = useHistory();
   const profile = getProfile();
+
+  const token = getAuthToken();
+
+  useEffect(() => {
+    api
+      .get(`/me/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => setProfile(response.data));
+  }, [token]);
 
   return (
     <>
@@ -29,21 +44,6 @@ const Home: React.FC = () => {
             title={"Agendamentos"}
             icon={CalendarOutlined}
             style={{ height: "100%" }}
-            action={
-              <p
-                onClick={() => {
-                  history.push("/vaccines");
-                }}
-                style={{
-                  color: "#701AA7",
-                  cursor: "pointer",
-                  verticalAlign: "middle",
-                  textAlign: "center",
-                }}
-              >
-                Ver todos cadastrados
-              </p>
-            }
           >
             <Row gutter={[24, 24]} style={{ width: "100%" }}>
               <Col xs={{ span: 24 }} lg={{ span: 24 }}>

@@ -110,7 +110,7 @@ const VaccineForm: FC<Props> = ({ buttonText, professional }) => {
         console.log(response);
         setLoading(false);
 
-        history.push("/home");
+        history.push(professional ? "/home" : `/minhas-vacinas`);
       })
       .catch((err) => {
         console.log(err);

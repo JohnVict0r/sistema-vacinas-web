@@ -289,7 +289,7 @@ const PrivateLayout: FC = ({ children }) => {
                   marginRight: "10px",
                 }}
               >
-                {profile && profile.username[0]}
+                {profile && profile.username && profile.username[0]}
               </Avatar>
               {profile.username}
               <DownOutlined />
